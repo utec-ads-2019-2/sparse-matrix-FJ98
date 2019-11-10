@@ -12,15 +12,15 @@ void Tester::execute() {
 
 template <typename T>
 void Tester::testMatrix(unsigned int rows, unsigned int columns) {
-    Mocker mocker;
-
     T **matrix1 = buildMatrix<T>(rows, columns);
     Matrix<T> test1 = setMatrix<T>(matrix1, rows, columns);
 
+    Mocker mocker;
+
     unsigned int scalar = mocker.generateRandomInt(10);
     Matrix<T> result = test1 * scalar;
-    for (int i = 0; i < rows; ++i) {
-        for (int j = 0; j < columns; ++j) {
+    for (int i = 0; i < static_cast<int>(rows); ++i) {
+        for (int j = 0; j < static_cast<int>(columns); ++j) {
             ASSERT(result(i, j) == matrix1[i][j] * scalar, "There is a problem with the scalar multiplication");
         }
     }
@@ -28,15 +28,15 @@ void Tester::testMatrix(unsigned int rows, unsigned int columns) {
     int **matrix2 = buildMatrix<T>(rows, columns);
     Matrix<T> test2 = setMatrix<T>(matrix2, rows, columns);
     result = test1 + test2;
-    for (int i = 0; i < rows; ++i) {
-        for (int j = 0; j < columns; ++j) {
+    for (int i = 0; i < static_cast<int>(rows); ++i) {
+        for (int j = 0; j < static_cast<int>(columns); ++j) {
             ASSERT(result(i, j) == matrix1[i][j] + matrix2[i][j], "There is a problem with the addition");
         }
     }
 
     result = test1 - test2;
-    for (int i = 0; i < rows; ++i) {
-        for (int j = 0; j < columns; ++j) {
+    for (int i = 0; i < static_cast<int>(rows); ++i) {
+        for (int j = 0; j < static_cast<int>(columns); ++j) {
             ASSERT(result(i, j) == matrix1[i][j] - matrix2[i][j], "There is a problem with the subtraction");
         }
     }
@@ -47,7 +47,7 @@ T** Tester::buildMatrix(unsigned int rows, unsigned int columns) {
     Mocker mocker;
 
     T **matrix = new int*[rows];
-    for (int i = 0; i < rows; ++i) {
+    for (int i = 0; i < static_cast<int>(rows); ++i) {
         matrix[i] = mocker.generateRandomArray<T>(columns);
     }
 
@@ -57,8 +57,8 @@ T** Tester::buildMatrix(unsigned int rows, unsigned int columns) {
 template <typename T>
 Matrix<T> Tester::setMatrix(T **&matrix, unsigned int rows, unsigned int columns) {
     Matrix<T> result(rows, columns);
-    for (int i = 0; i < rows; ++i) {
-        for (int j = 0; j < columns; ++j) {
+    for (int i = 0; i < static_cast<int>(rows); ++i) {
+        for (int j = 0; j < static_cast<int>(columns); ++j) {
             result.set(i, j, matrix[i][j]);
             ASSERT(result(i, j) == matrix[i][j], "There is a problem with the set or operator()");
         }
