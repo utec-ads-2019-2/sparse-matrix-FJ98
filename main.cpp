@@ -1,7 +1,6 @@
-#include <bits/stdc++.h>
-
 #include "tester/tester.h"
-#include <matrix.h>
+#include "matrix.h"
+
 int main() {
     Tester::execute();
     cout << "===============" << endl;

@@ -4,7 +4,6 @@
 #include "node.h"
 #include <stdexcept>
 
-#include <bits/stdc++.h>
 using namespace std;
 
 #define EMPTY 0
@@ -162,6 +161,8 @@ public:
         }
         return *resultantMatrix;
     }
+
+    // Tus operaciones serán un poco lentas porque usas los métodos de la matriz en vez de navegar con los punteros
 
     Matrix<T>& operator+(const Matrix<T>& other) const {
         if (this->rows != other.rows || this->columns != other.columns) { throw out_of_range("Matrices dimensions must be equals");}
